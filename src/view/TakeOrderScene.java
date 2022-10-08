@@ -100,7 +100,7 @@ public class TakeOrderScene {
                 case 2 -> additionsNumber = 3;
                 case 3 -> additionsNumber = 4;
             }
-            cafePanel.updateSelectedCoffee();
+            cafePanel.updateSelectedAdditions();
         }
     }
 

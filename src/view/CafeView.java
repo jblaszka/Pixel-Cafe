@@ -47,7 +47,7 @@ public class CafeView extends JPanel implements BaristaObserver {
     }
 
     public void setSelectedAdditives(int additivesNumber){
-        cafeController.setCoffee(additivesNumber);
+        cafeController.setAdditions(additivesNumber);
     }
 
 }

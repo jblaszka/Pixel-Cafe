@@ -6,7 +6,7 @@ import java.awt.*;
 public class CafePanel extends JPanel implements Runnable {
     final int screenWidth = 1400;
     final int screenHeight = 800;
-    int FPS = 5;
+    int FPS = 8;
     private int coffeeNumber = 0;
     private int additionsNumber = 0;
     private CafeView cafeView;
@@ -77,9 +77,9 @@ public class CafePanel extends JPanel implements Runnable {
         cafeView.giveChoiceToController(coffeeNumber);
     }
 
-    public void updateSekectedAdditions(){
+    public void updateSelectedAdditions(){
         additionsNumber = takeOrderScene.getAdditionsNumber();
-        cafeView.updateSelectedAdditives();
+        cafeView.setSelectedAdditives(additionsNumber);
     }
 
     public void changeScene(int numberScene){

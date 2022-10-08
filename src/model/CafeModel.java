@@ -25,28 +25,35 @@ public class CafeModel implements CafeModelInterface{
 
     public void setCoffeeAdditiveNumber(int additiveNumber){
         this.additiveNumber = additiveNumber;
-        sceneNumber = 2;
         setAdditive();
+        matchSceneToOrder();
         notifyObservers();
     }
 
     public void setCoffee(){
         switch (coffeeNumber){
-            case 0 -> coffee = new Latte();
-            case 1 -> coffee = new Americano();
-            case 2 -> coffee = new Cappuccino();
-            case 3 -> coffee = new Espresso();
+            case 1 -> coffee = new Latte();
+            case 2 -> coffee = new Americano();
+            case 3 -> coffee = new Cappuccino();
+            case 4 -> coffee = new Espresso();
         }
     }
 
     public void setAdditive(){
         switch (additiveNumber){
-            case 0 -> coffee = new Milk(coffee);
-            case 1 -> coffee = new Sugar(coffee);
-            case 2 -> coffee = new Honey(coffee);
-            case 3 -> coffee = new Espresso();
+            case 1 -> coffee = new Milk(coffee);
+            case 2 -> coffee = new Sugar(coffee);
+            case 3 -> coffee = new Honey(coffee);
         }
         print();
+    }
+
+    public void matchSceneToOrder(){
+        switch (coffeeNumber){
+            case 1 -> sceneNumber = 2;
+            case 2, 3 -> sceneNumber = 3;
+            case 4 -> sceneNumber = 4;
+        }
     }
 
     public void print(){
@@ -91,8 +98,8 @@ public class CafeModel implements CafeModelInterface{
     }
 
     public void notifyObservers(){
-        for(int i = 0; i < baristaObservers.size(); i++){
-            BaristaObserver observer = (BaristaObserver) baristaObservers.get(i);
+        for (Object baristaObserver : baristaObservers) {
+            BaristaObserver observer = (BaristaObserver) baristaObserver;
             observer.updateSelectedCoffee();
         }
     }
