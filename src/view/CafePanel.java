@@ -7,7 +7,8 @@ public class CafePanel extends JPanel implements Runnable {
     final int screenWidth = 1400;
     final int screenHeight = 800;
     int FPS = 5;
-    private int choice = 0;
+    private int coffeeNumber = 0;
+    private int additionsNumber = 0;
     private CafeView cafeView;
 
     KeyHandler keyHandler = new KeyHandler();
@@ -54,7 +55,7 @@ public class CafePanel extends JPanel implements Runnable {
         super.paintComponent(g);
         Graphics2D graph2D = (Graphics2D) g;
 
-        takeOrderScene.setScene(graph2D);
+        takeOrderScene.drawText(graph2D);
 
         graph2D.dispose();
     }
@@ -69,15 +70,19 @@ public class CafePanel extends JPanel implements Runnable {
 
     public void update() {
         takeOrderScene.updatePointer();
-        takeOrderScene.updateScene();
     }
 
-    public void updateChoice() {
-        choice = takeOrderScene.getChoice();
-        cafeView.giveChoiceToController(choice);
+    public void updateSelectedCoffee() {
+        coffeeNumber = takeOrderScene.getCoffeeNumber();
+        cafeView.giveChoiceToController(coffeeNumber);
+    }
+
+    public void updateSekectedAdditions(){
+        additionsNumber = takeOrderScene.getAdditionsNumber();
+        cafeView.updateSelectedAdditives();
     }
 
     public void changeScene(int numberScene){
-        backgroundView.setBackground(numberScene);
+        takeOrderScene.setSceneNumber(numberScene);
     }
 }

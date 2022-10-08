@@ -9,11 +9,6 @@ import view.CafeView;
 
 public class Main {
     public static void main(String[] args){
-        Coffee coffee = new Espresso();
-        System.out.println(coffee.getDescription());
-        coffee = new Milk(coffee);
-        System.out.println(coffee.getDescription());
-
         CafeModel cafeModel = new CafeModel();
         CafeController cafeController = new CafeController(cafeModel);
 

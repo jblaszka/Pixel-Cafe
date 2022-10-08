@@ -1,5 +1,9 @@
 package model;
 
+import model.Condiment.Honey;
+import model.Condiment.Milk;
+import model.Condiment.Sugar;
+import model.coffee.*;
 import view.BaristaObserver;
 
 import java.util.ArrayList;
@@ -8,16 +12,49 @@ public class CafeModel implements CafeModelInterface{
     private ArrayList baristaObservers = new ArrayList();
     private int orderStatus = 0;
     private int sceneNumber = 0;
+    private int coffeeNumber;
+    private int additiveNumber;
+    private Coffee coffee;
 
-    public void testowa(int liczba){
-        System.out.println(liczba);
-        sceneNumber++;
+    public void setCoffeeNumber(int coffeeNumber){
+        this.coffeeNumber = coffeeNumber;
+        sceneNumber = 1;
+        setCoffee();
         notifyObservers();
+    }
+
+    public void setCoffeeAdditiveNumber(int additiveNumber){
+        this.additiveNumber = additiveNumber;
+        sceneNumber = 2;
+        setAdditive();
+        notifyObservers();
+    }
+
+    public void setCoffee(){
+        switch (coffeeNumber){
+            case 0 -> coffee = new Latte();
+            case 1 -> coffee = new Americano();
+            case 2 -> coffee = new Cappuccino();
+            case 3 -> coffee = new Espresso();
+        }
+    }
+
+    public void setAdditive(){
+        switch (additiveNumber){
+            case 0 -> coffee = new Milk(coffee);
+            case 1 -> coffee = new Sugar(coffee);
+            case 2 -> coffee = new Honey(coffee);
+            case 3 -> coffee = new Espresso();
+        }
+        print();
+    }
+
+    public void print(){
+        System.out.println(coffee.getDescription());
     }
 
     @Override
     public void starTakingTheOrder() {
-
     }
 
     @Override
@@ -56,7 +93,7 @@ public class CafeModel implements CafeModelInterface{
     public void notifyObservers(){
         for(int i = 0; i < baristaObservers.size(); i++){
             BaristaObserver observer = (BaristaObserver) baristaObservers.get(i);
-            observer.updateOrderStatus();
+            observer.updateSelectedCoffee();
         }
     }
 

@@ -20,11 +20,11 @@ public class CafeController implements CafeControllerInterface{
 
     @Override
     public void setCoffee(int coffee) {
-        cafeModel.testowa(coffee);
+        cafeModel.setCoffeeNumber(coffee);
     }
 
     @Override
-    public void setAdditions() {
-
+    public void setAdditions(int additions) {
+        cafeModel.setCoffeeAdditiveNumber(additions);
     }
 }

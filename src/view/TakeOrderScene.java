@@ -5,7 +5,8 @@ import java.util.ArrayList;
 
 public class TakeOrderScene {
     private int chosen_pos = 0;
-    private int choice = 0;
+    private int coffeeNumber = 0;
+    private int additionsNumber = 0;
     private final int pos_1 = 630;
     private final int pos_2 = 670;
     private final int pos_3 = 705;
@@ -15,7 +16,7 @@ public class TakeOrderScene {
     Background backgroundView;
     CafePanel cafePanel;
     Text text = new Text();
-    int scene = 0;
+    int sceneNumber = 0;
     private final ArrayList<Integer> position = new ArrayList<Integer>();
 
     public TakeOrderScene(KeyHandler keyHandler, CafePanel cafePanel) {
@@ -44,14 +45,16 @@ public class TakeOrderScene {
         }
     }
 
-    public void setScene(Graphics2D graphics2D){
+    public void drawText(Graphics2D graphics2D){
         backgroundView.drawBackground(graphics2D);
+        backgroundView.setBackgroundNumber(sceneNumber);
 
-        if(scene == 0){
+        if(sceneNumber == 0){
             sceneTakeOrder(graphics2D);
-            updateChoice();
-        }else if(scene == 1){
+            setSelectedCoffee();
+        }else if(sceneNumber == 1){
             sceneChoseCondiment(graphics2D);
+            setSelectedAdditions();
         }
     }
 
@@ -64,7 +67,6 @@ public class TakeOrderScene {
         text.setMessage("Hello. What can i get you?");
         text.setMessagePosition(695, 225);
         text.drawMessage(graphics2D);
-
     }
 
     public void sceneChoseCondiment(Graphics2D graphics2D){
@@ -78,26 +80,38 @@ public class TakeOrderScene {
         text.drawMessage(graphics2D);
     }
 
-    public void updateChoice(){
+    public void setSelectedCoffee(){
         if(keyHandler.accepted){
-            System.out.println("BYM");
             switch (chosen_pos){
-                case 0 -> choice = 1;
-                case 1 -> choice = 2;
-                case 2 -> choice = 3;
-                case 3 -> choice = 4;
+                case 0 -> coffeeNumber = 1;
+                case 1 -> coffeeNumber = 2;
+                case 2 -> coffeeNumber = 3;
+                case 3 -> coffeeNumber = 4;
             }
-            cafePanel.updateChoice();
+            cafePanel.updateSelectedCoffee();
         }
     }
 
-    public int getChoice(){
-        return choice;
+    public void setSelectedAdditions(){
+        if(keyHandler.accepted){
+            switch (chosen_pos){
+                case 0 -> additionsNumber = 1;
+                case 1 -> additionsNumber = 2;
+                case 2 -> additionsNumber = 3;
+                case 3 -> additionsNumber = 4;
+            }
+            cafePanel.updateSelectedCoffee();
+        }
     }
 
-    public void updateScene(){
-        if(keyHandler.accepted) {
-            scene ++;
-        }
+    public int getCoffeeNumber(){
+        return coffeeNumber;
+    }
+
+    public int getAdditionsNumber(){ return additionsNumber; }
+
+    public void setSceneNumber(int sceneNumber){
+        this.sceneNumber = sceneNumber;
     }
 }
+

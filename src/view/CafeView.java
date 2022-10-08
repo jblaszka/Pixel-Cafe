@@ -6,6 +6,7 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.io.Writer;
+import java.security.PublicKey;
 
 public class CafeView extends JPanel implements BaristaObserver {
     private JFrame window;
@@ -33,12 +34,20 @@ public class CafeView extends JPanel implements BaristaObserver {
     }
 
     @Override
-    public void updateOrderStatus() {
+    public void updateSelectedCoffee() {
         cafePanel.changeScene(cafeModel.getNewScene());
     }
 
+    @Override
+    public void updateSelectedAdditives(){}
+
+
     public void giveChoiceToController(int choice){
         cafeController.setCoffee(choice);
+    }
+
+    public void setSelectedAdditives(int additivesNumber){
+        cafeController.setCoffee(additivesNumber);
     }
 
 }

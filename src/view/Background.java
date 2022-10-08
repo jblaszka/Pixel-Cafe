@@ -1,7 +1,6 @@
 package view;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -17,7 +16,8 @@ public class Background {
     private BufferedImage additions;
     private BufferedImage americanoAndCappuccino;
 
-    int pos = 0;
+    int backgroundNumber = 0;
+    int lala = 5;
 
     private int posY = 630;
 
@@ -40,17 +40,16 @@ public class Background {
     }
 
     public void updateBackground(String backgroundName) {
-
     }
 
     public void drawBackground(Graphics2D graph2D){
-        if(pos == 1){
+        if(backgroundNumber == 1){
             image = additions;
-        }else if(pos == 2){
+        }else if(backgroundNumber == 2){
             image = latte;
-        }else if(pos == 3){
+        }else if(backgroundNumber == 3){
             image = americanoAndCappuccino;
-        }else if(pos == 4){
+        }else if(backgroundNumber == 4){
             image = espresso;
         }else{
             image = takeOrder;
@@ -58,8 +57,8 @@ public class Background {
         graph2D.drawImage(image, 0, 0, 1400, 800, null);
     }
 
-    public void setBackground(int pos){
-        this.pos = pos;
+    public void setBackgroundNumber(int backgroundNumber){
+        this.backgroundNumber = backgroundNumber;
     }
 }
 

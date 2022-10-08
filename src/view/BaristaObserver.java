@@ -1,5 +1,6 @@
 package view;
 
 public interface BaristaObserver {
-    void updateOrderStatus();
+    void updateSelectedCoffee();
+    void updateSelectedAdditives();
 }

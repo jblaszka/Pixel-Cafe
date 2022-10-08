@@ -3,5 +3,5 @@ package controller;
 public interface CafeControllerInterface {
     void setOrderStatus();
     void setCoffee(int choice);
-    void setAdditions();
+    void setAdditions(int additions);
 }
