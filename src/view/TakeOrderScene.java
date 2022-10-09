@@ -7,6 +7,7 @@ public class TakeOrderScene {
     private int chosen_pos = 0;
     private int coffeeNumber = 0;
     private int additionsNumber = 0;
+    private double price = 0;
     private final int pos_1 = 630;
     private final int pos_2 = 670;
     private final int pos_3 = 705;
@@ -55,6 +56,9 @@ public class TakeOrderScene {
         }else if(sceneNumber == 1){
             sceneChoseCondiment(graphics2D);
             setSelectedAdditions();
+        }else if(sceneNumber == 2){
+            scenePayment(graphics2D);
+            setSelectedAdditions();
         }
     }
 
@@ -77,6 +81,12 @@ public class TakeOrderScene {
 
         text.setMessage("Any additions to the drink?");
         text.setMessagePosition(685, 225);
+        text.drawMessage(graphics2D);
+    }
+
+    public void scenePayment(Graphics2D graphics2D){
+        text.setMessage("Ok. That will be $" + price);
+        text.setMessagePosition(745, 225);
         text.drawMessage(graphics2D);
     }
 
@@ -112,6 +122,10 @@ public class TakeOrderScene {
 
     public void setSceneNumber(int sceneNumber){
         this.sceneNumber = sceneNumber;
+    }
+
+    public void setPrice(double price){
+        this.price = price;
     }
 }
 

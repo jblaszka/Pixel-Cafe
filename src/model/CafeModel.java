@@ -12,6 +12,7 @@ public class CafeModel implements CafeModelInterface{
     private ArrayList baristaObservers = new ArrayList();
     private int orderStatus = 0;
     private int sceneNumber = 0;
+    private double price = 0;
     private int coffeeNumber;
     private int additiveNumber;
     private Coffee coffee;
@@ -20,15 +21,17 @@ public class CafeModel implements CafeModelInterface{
         this.coffeeNumber = coffeeNumber;
         sceneNumber = 1;
         setCoffee();
-        notifyObservers();
+        notifyObserversAboutOrder();
     }
 
     public void setCoffeeAdditiveNumber(int additiveNumber){
         this.additiveNumber = additiveNumber;
+        sceneNumber = 2;
         setAdditive();
-        matchSceneToOrder();
-        notifyObservers();
+        notifyObserversAboutOrder();
+        notifyObserversAboutPrice();
     }
+
 
     public void setCoffee(){
         switch (coffeeNumber){
@@ -41,9 +44,21 @@ public class CafeModel implements CafeModelInterface{
 
     public void setAdditive(){
         switch (additiveNumber){
-            case 1 -> coffee = new Milk(coffee);
-            case 2 -> coffee = new Sugar(coffee);
-            case 3 -> coffee = new Honey(coffee);
+            case 1 -> {
+                coffee = new Milk(coffee);
+                price = coffee.getPrice();
+            }
+            case 2 -> {
+                coffee = new Sugar(coffee);
+                price = coffee.getPrice();
+            }
+            case 3 -> {
+                coffee = new Honey(coffee);
+                price = coffee.getPrice();
+            }
+            case 4 -> {
+                price = coffee.getPrice();
+            }
         }
         print();
     }
@@ -97,10 +112,17 @@ public class CafeModel implements CafeModelInterface{
         }
     }
 
-    public void notifyObservers(){
+    public void notifyObserversAboutOrder(){
         for (Object baristaObserver : baristaObservers) {
             BaristaObserver observer = (BaristaObserver) baristaObserver;
             observer.updateSelectedCoffee();
+        }
+    }
+
+    public void notifyObserversAboutPrice(){
+        for (Object baristaObserver : baristaObservers) {
+            BaristaObserver observer = (BaristaObserver) baristaObserver;
+            observer.updateBill();
         }
     }
 
@@ -108,4 +130,7 @@ public class CafeModel implements CafeModelInterface{
         return sceneNumber;
     }
 
+    public double getPrice() {
+        return price;
+    }
 }

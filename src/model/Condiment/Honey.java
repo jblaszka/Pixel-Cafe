@@ -11,6 +11,11 @@ public class Honey extends CondimentDecorator{
 
     @Override
     public String getDescription() {
-        return null;
+        return coffee.getDescription() + " with honey";
+    }
+
+    @Override
+    public double getPrice() {
+        return coffee.getPrice() + 0.25;
     }
 }

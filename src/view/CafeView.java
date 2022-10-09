@@ -39,8 +39,9 @@ public class CafeView extends JPanel implements BaristaObserver {
     }
 
     @Override
-    public void updateSelectedAdditives(){}
-
+    public void updateBill(){
+        cafePanel.setPrice(cafeModel.getPrice());
+    }
 
     public void giveChoiceToController(int choice){
         cafeController.setCoffee(choice);

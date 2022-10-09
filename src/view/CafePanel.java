@@ -6,15 +6,14 @@ import java.awt.*;
 public class CafePanel extends JPanel implements Runnable {
     final int screenWidth = 1400;
     final int screenHeight = 800;
-    int FPS = 8;
+    int FPS = 6;
     private int coffeeNumber = 0;
     private int additionsNumber = 0;
     private CafeView cafeView;
+    private double price = 0;
 
     KeyHandler keyHandler = new KeyHandler();
     Thread cafeSimulationThread;
-    Background backgroundView = new Background(keyHandler);
-    Text text = new Text();
     TakeOrderScene takeOrderScene = new TakeOrderScene(keyHandler, this);
 
     public CafePanel(CafeView cafeView){
@@ -85,4 +84,11 @@ public class CafePanel extends JPanel implements Runnable {
     public void changeScene(int numberScene){
         takeOrderScene.setSceneNumber(numberScene);
     }
+
+    public void setPrice(double price){
+        this.price = price;
+        takeOrderScene.setPrice(price);
+    }
 }
+
+

@@ -7,33 +7,30 @@ import java.io.File;
 
 public class Background {
     KeyHandler keyHandler;
-    Text text = new Text();
-    private String background;
     BufferedImage image;
-    private BufferedImage takeOrder;
+    private BufferedImage takeOrderScene;
+    private BufferedImage paymentScene;
     private BufferedImage latte;
     private BufferedImage espresso;
     private BufferedImage additions;
     private BufferedImage americanoAndCappuccino;
 
     int backgroundNumber = 0;
-    int lala = 5;
-
-    private int posY = 630;
 
     public Background(KeyHandler keyHandler) {
         this.keyHandler = keyHandler;
         getBackgroundView();
-        background = "takeOrder";
     }
 
     public void getBackgroundView() {
         try {
-            takeOrder = ImageIO.read(new File("C:\\Users\\48791\\IdeaProjects\\Pixel-Cafe\\res\\background\\takeOrder_n.png"));
+            takeOrderScene = ImageIO.read(new File("C:\\Users\\48791\\IdeaProjects\\Pixel-Cafe\\res\\background\\takeOrder_n.png"));
+            additions = ImageIO.read(new File("C:\\Users\\48791\\IdeaProjects\\Pixel-Cafe\\res\\background\\additions.png"));
+            paymentScene = ImageIO.read(new File("C:\\Users\\48791\\IdeaProjects\\Pixel-Cafe\\res\\background\\paymentScene.png"));
             latte = ImageIO.read(new File("C:\\Users\\48791\\IdeaProjects\\Pixel-Cafe\\res\\background\\latte.png"));
             espresso = ImageIO.read(new File("C:\\Users\\48791\\IdeaProjects\\Pixel-Cafe\\res\\background\\espresso.png"));
             americanoAndCappuccino = ImageIO.read(new File("C:\\Users\\48791\\IdeaProjects\\Pixel-Cafe\\res\\background\\americanoAndCappuccino.png"));
-            additions = ImageIO.read(new File("C:\\Users\\48791\\IdeaProjects\\Pixel-Cafe\\res\\background\\additions.png"));
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -43,16 +40,18 @@ public class Background {
     }
 
     public void drawBackground(Graphics2D graph2D){
-        if(backgroundNumber == 1){
+        if(backgroundNumber == 1) {
             image = additions;
         }else if(backgroundNumber == 2){
-            image = latte;
+            image = paymentScene;
         }else if(backgroundNumber == 3){
-            image = americanoAndCappuccino;
+            image = latte;
         }else if(backgroundNumber == 4){
+            image = americanoAndCappuccino;
+        }else if(backgroundNumber == 5){
             image = espresso;
         }else{
-            image = takeOrder;
+            image = takeOrderScene;
         }
         graph2D.drawImage(image, 0, 0, 1400, 800, null);
     }

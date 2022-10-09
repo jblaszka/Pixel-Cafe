@@ -13,4 +13,9 @@ public class Sugar extends CondimentDecorator{
     public String getDescription() {
         return coffee.getDescription() + " with sugar";
     }
+
+    @Override
+    public double getPrice() {
+        return coffee.getPrice();
+    }
 }

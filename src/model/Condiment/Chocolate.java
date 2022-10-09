@@ -13,4 +13,9 @@ public class Chocolate extends CondimentDecorator{
     public String getDescription() {
         return coffee.getDescription() + " with Chocolate";
     }
+
+    @Override
+    public double getPrice() {
+        return 0;
+    }
 }
