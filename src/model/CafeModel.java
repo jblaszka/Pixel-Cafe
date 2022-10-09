@@ -1,8 +1,8 @@
 package model;
 
-import model.Condiment.Honey;
-import model.Condiment.Milk;
-import model.Condiment.Sugar;
+import model.condiment.Honey;
+import model.condiment.Milk;
+import model.condiment.Sugar;
 import model.coffee.*;
 import view.BaristaObserver;
 
@@ -17,6 +17,7 @@ public class CafeModel implements CafeModelInterface{
     private int additiveNumber;
     private Coffee coffee;
 
+    @Override
     public void setCoffeeNumber(int coffeeNumber){
         this.coffeeNumber = coffeeNumber;
         sceneNumber = 1;
@@ -24,6 +25,7 @@ public class CafeModel implements CafeModelInterface{
         notifyObserversAboutOrder();
     }
 
+    @Override
     public void setCoffeeAdditiveNumber(int additiveNumber){
         this.additiveNumber = additiveNumber;
         sceneNumber = 2;
@@ -32,7 +34,13 @@ public class CafeModel implements CafeModelInterface{
         notifyObserversAboutPrice();
     }
 
+    @Override
+    public void completeTheOrder(){
+        matchSceneToOrder();
+        notifyObserversAboutOrder();
+    }
 
+    @Override
     public void setCoffee(){
         switch (coffeeNumber){
             case 1 -> coffee = new Latte();
@@ -60,43 +68,14 @@ public class CafeModel implements CafeModelInterface{
                 price = coffee.getPrice();
             }
         }
-        print();
     }
 
     public void matchSceneToOrder(){
         switch (coffeeNumber){
-            case 1 -> sceneNumber = 2;
-            case 2, 3 -> sceneNumber = 3;
-            case 4 -> sceneNumber = 4;
+            case 1 -> sceneNumber = 3;
+            case 2, 3 -> sceneNumber = 4;
+            case 4 -> sceneNumber = 5;
         }
-    }
-
-    public void print(){
-        System.out.println(coffee.getDescription());
-    }
-
-    @Override
-    public void starTakingTheOrder() {
-    }
-
-    @Override
-    public void takeListOfCondiments() {
-
-    }
-
-    @Override
-    public void getFinishedOrder() {
-
-    }
-
-    @Override
-    public void setOrderStatus(int orderStatus) {
-      this.orderStatus = orderStatus;
-    }
-
-    @Override
-    public int getOrderStatus() {
-        return orderStatus;
     }
 
     @Override

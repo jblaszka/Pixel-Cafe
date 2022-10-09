@@ -7,17 +7,14 @@ public class CafePanel extends JPanel implements Runnable {
     final int screenWidth = 1400;
     final int screenHeight = 800;
     int FPS = 6;
-    private int coffeeNumber = 0;
-    private int additionsNumber = 0;
-    private CafeView cafeView;
-    private double price = 0;
 
-    KeyHandler keyHandler = new KeyHandler();
+    KeyHandler keyHandler;
     Thread cafeSimulationThread;
-    TakeOrderScene takeOrderScene = new TakeOrderScene(keyHandler, this);
+    SceneManager sceneManager;
 
-    public CafePanel(CafeView cafeView){
-        this.cafeView = cafeView;
+    public CafePanel( SceneManager sceneManager, KeyHandler keyHandler){
+        this.sceneManager = sceneManager;
+        this.keyHandler = keyHandler;
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.pink);
         this.setDoubleBuffered(true);
@@ -53,10 +50,12 @@ public class CafePanel extends JPanel implements Runnable {
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D graph2D = (Graphics2D) g;
-
-        takeOrderScene.drawText(graph2D);
-
+        sceneManager.drawScene(graph2D);
         graph2D.dispose();
+    }
+
+    public void update() {
+        sceneManager.updatePointer();
     }
 
     public int getScreenHeight(){
@@ -67,28 +66,6 @@ public class CafePanel extends JPanel implements Runnable {
         return  screenWidth;
     }
 
-    public void update() {
-        takeOrderScene.updatePointer();
-    }
-
-    public void updateSelectedCoffee() {
-        coffeeNumber = takeOrderScene.getCoffeeNumber();
-        cafeView.giveChoiceToController(coffeeNumber);
-    }
-
-    public void updateSelectedAdditions(){
-        additionsNumber = takeOrderScene.getAdditionsNumber();
-        cafeView.setSelectedAdditives(additionsNumber);
-    }
-
-    public void changeScene(int numberScene){
-        takeOrderScene.setSceneNumber(numberScene);
-    }
-
-    public void setPrice(double price){
-        this.price = price;
-        takeOrderScene.setPrice(price);
-    }
 }
 
 

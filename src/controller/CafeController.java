@@ -14,11 +14,6 @@ public class CafeController implements CafeControllerInterface{
     }
 
     @Override
-    public void setOrderStatus() {
-
-    }
-
-    @Override
     public void setCoffee(int coffee) {
         cafeModel.setCoffeeNumber(coffee);
     }
@@ -26,5 +21,10 @@ public class CafeController implements CafeControllerInterface{
     @Override
     public void setAdditions(int additions) {
         cafeModel.setCoffeeAdditiveNumber(additions);
+    }
+
+    @Override
+    public void completeTheOrder() {
+        cafeModel.completeTheOrder();
     }
 }

@@ -3,11 +3,11 @@ package model;
 import view.BaristaObserver;
 
 public interface CafeModelInterface {
-    void starTakingTheOrder();
-    void takeListOfCondiments();
-    void getFinishedOrder();
-    void setOrderStatus(int orderStatus);
-    int getOrderStatus();
+    void setCoffee();
+    void completeTheOrder();
+    void setCoffeeNumber(int coffeeNumber);
+    void setCoffeeAdditiveNumber(int additiveNumber);
+    void setAdditive();
     void addBaristaObserver(BaristaObserver baristaObserver);
     void removeBaristaObserver(BaristaObserver baristaObserver);
 }

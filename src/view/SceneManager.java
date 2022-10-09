@@ -3,7 +3,7 @@ package view;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class TakeOrderScene {
+public class SceneManager {
     private int chosen_pos = 0;
     private int coffeeNumber = 0;
     private int additionsNumber = 0;
@@ -13,17 +13,17 @@ public class TakeOrderScene {
     private final int pos_3 = 705;
     private final int pos_4 = 743;
 
-    KeyHandler keyHandler;
-    Background backgroundView;
-    CafePanel cafePanel;
-    Text text = new Text();
-    int sceneNumber = 0;
-    private final ArrayList<Integer> position = new ArrayList<Integer>();
+    private final KeyHandler keyHandler;
+    private final Background backgroundView;
+    private final CafeView cafeView;
+    private final Text text = new Text();
+    private int sceneNumber = 0;
+    private final ArrayList<Integer> position = new ArrayList<>();
 
-    public TakeOrderScene(KeyHandler keyHandler, CafePanel cafePanel) {
+    public SceneManager(KeyHandler keyHandler, CafeView cafeView) {
         this.keyHandler = keyHandler;
         this.backgroundView = new Background(keyHandler);
-        this.cafePanel = cafePanel;
+        this.cafeView = cafeView;
         position.add(pos_1);
         position.add(pos_2);
         position.add(pos_3);
@@ -46,7 +46,7 @@ public class TakeOrderScene {
         }
     }
 
-    public void drawText(Graphics2D graphics2D){
+    public void drawScene(Graphics2D graphics2D){
         backgroundView.drawBackground(graphics2D);
         backgroundView.setBackgroundNumber(sceneNumber);
 
@@ -58,7 +58,7 @@ public class TakeOrderScene {
             setSelectedAdditions();
         }else if(sceneNumber == 2){
             scenePayment(graphics2D);
-            setSelectedAdditions();
+            completeTheOrder();
         }
     }
 
@@ -98,7 +98,7 @@ public class TakeOrderScene {
                 case 2 -> coffeeNumber = 3;
                 case 3 -> coffeeNumber = 4;
             }
-            cafePanel.updateSelectedCoffee();
+            cafeView.giveChoiceToController(coffeeNumber);
         }
     }
 
@@ -110,15 +110,15 @@ public class TakeOrderScene {
                 case 2 -> additionsNumber = 3;
                 case 3 -> additionsNumber = 4;
             }
-            cafePanel.updateSelectedAdditions();
+            cafeView.setSelectedAdditives(additionsNumber);
         }
     }
 
-    public int getCoffeeNumber(){
-        return coffeeNumber;
+    public void completeTheOrder(){
+        if(keyHandler.accepted) {
+            cafeView.completeTheOrder();
+        }
     }
-
-    public int getAdditionsNumber(){ return additionsNumber; }
 
     public void setSceneNumber(int sceneNumber){
         this.sceneNumber = sceneNumber;

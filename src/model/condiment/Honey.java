@@ -1,4 +1,4 @@
-package model.Condiment;
+package model.condiment;
 
 import model.coffee.Coffee;
 

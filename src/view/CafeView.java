@@ -9,10 +9,12 @@ import java.io.Writer;
 import java.security.PublicKey;
 
 public class CafeView extends JPanel implements BaristaObserver {
-    private JFrame window;
-    private CafeModel cafeModel;
-    private CafePanel cafePanel;
-    private CafeController cafeController;
+    private final JFrame window;
+    private final CafeModel cafeModel;
+    private final CafePanel cafePanel;
+    private final CafeController cafeController;
+    private final KeyHandler keyHandler = new KeyHandler();
+    SceneManager sceneManager;
 
     public CafeView(CafeController cafeController, CafeModel cafeModel){
         this.cafeModel = cafeModel;
@@ -23,7 +25,8 @@ public class CafeView extends JPanel implements BaristaObserver {
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
         window.setSize(1400, 838);
-        this.cafePanel = new CafePanel(this);
+        this.sceneManager = new SceneManager(keyHandler, this);
+        this.cafePanel = new CafePanel(sceneManager, keyHandler);
         window.add(cafePanel);
         window.pack();
         window.setLocationRelativeTo(null);
@@ -35,12 +38,12 @@ public class CafeView extends JPanel implements BaristaObserver {
 
     @Override
     public void updateSelectedCoffee() {
-        cafePanel.changeScene(cafeModel.getNewScene());
+        sceneManager.setSceneNumber(cafeModel.getNewScene());
     }
 
     @Override
     public void updateBill(){
-        cafePanel.setPrice(cafeModel.getPrice());
+        sceneManager.setPrice(cafeModel.getPrice());
     }
 
     public void giveChoiceToController(int choice){
@@ -49,6 +52,10 @@ public class CafeView extends JPanel implements BaristaObserver {
 
     public void setSelectedAdditives(int additivesNumber){
         cafeController.setAdditions(additivesNumber);
+    }
+
+    public void completeTheOrder(){
+        cafeController.completeTheOrder();
     }
 
 }
