@@ -8,10 +8,6 @@ public class SceneManager {
     private int coffeeNumber = 0;
     private int additionsNumber = 0;
     private double price = 0;
-    private final int pos_1 = 630;
-    private final int pos_2 = 670;
-    private final int pos_3 = 705;
-    private final int pos_4 = 743;
 
     private final KeyHandler keyHandler;
     private final Background backgroundView;
@@ -24,6 +20,12 @@ public class SceneManager {
         this.keyHandler = keyHandler;
         this.backgroundView = new Background(keyHandler);
         this.cafeView = cafeView;
+
+        int pos_1 = 630;
+        int pos_2 = 670;
+        int pos_3 = 705;
+        int pos_4 = 743;
+
         position.add(pos_1);
         position.add(pos_2);
         position.add(pos_3);

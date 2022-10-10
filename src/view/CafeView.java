@@ -19,21 +19,20 @@ public class CafeView extends JPanel implements BaristaObserver {
     public CafeView(CafeController cafeController, CafeModel cafeModel){
         this.cafeModel = cafeModel;
         this.cafeController = cafeController;
+        this.sceneManager = new SceneManager(keyHandler, this);
+        this.cafePanel = new CafePanel(sceneManager, keyHandler);
+
         cafeModel.addBaristaObserver(this);
         window = new JFrame();
-
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
         window.setSize(1400, 838);
-        this.sceneManager = new SceneManager(keyHandler, this);
-        this.cafePanel = new CafePanel(sceneManager, keyHandler);
         window.add(cafePanel);
         window.pack();
         window.setLocationRelativeTo(null);
         window.setVisible(true);
 
         cafePanel.starCafeSimulationThread();
-
     }
 
     @Override
